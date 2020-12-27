@@ -14,7 +14,6 @@ def main():
     game_is_on = True
     while game_is_on:
         car_manager.spawn_car()
-        # time.sleep(0.)
         screen.update()
         if not car_manager.move_cars(player):
             scoreboard.lose()
@@ -22,7 +21,7 @@ def main():
             exit(0)
         if player.check_win():
             scoreboard.next()
-            player.reset()
+            player.reposition()
             car_manager.speedup()
 
 
@@ -31,9 +30,9 @@ def setup_screen(player):
     screen.setup(width=600, height=600)
     screen.tracer(0)
     screen.register_shape("rectangle", ((-10, -15), (-10, 15), (10, 15), (10, -15)))
-    screen.onkey(player.move, "Up")
-    screen.onkey(player.move, "w")
     screen.listen()
+    screen.onkey(player.move_up, "Up")
+    screen.onkey(player.move_up, "w")
     return screen
 
 

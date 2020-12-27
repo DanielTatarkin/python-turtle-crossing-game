@@ -5,20 +5,22 @@ MOVE_DISTANCE = 15
 FINISH_LINE_Y = 270
 
 
-class Player:
+class Player(Turtle):
 
     def __init__(self):
-        self.turtle = Turtle("turtle")
-        self.reset()
+        super().__init__()
+        self.shape("turtle")
+        self.penup()
+        self.reposition()
 
-    def move(self):
-        self.turtle.forward(MOVE_DISTANCE)
+    def move_up(self):
+        self.forward(MOVE_DISTANCE)
 
     def check_win(self):
-        return self.turtle.ycor() > FINISH_LINE_Y
+        return self.ycor() > FINISH_LINE_Y
 
-    def reset(self):
-        self.turtle.reset()
-        self.turtle.left(90)
-        self.turtle.penup()
-        self.turtle.goto(STARTING_POSITION)
+    def reposition(self):
+        self.reset()
+        self.setheading(90)
+        self.penup()
+        self.goto(STARTING_POSITION)

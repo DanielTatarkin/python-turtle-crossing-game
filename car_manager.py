@@ -15,21 +15,19 @@ class CarManager:
     def spawn_car(self):
         if random.randint(0, 200) > 1:
             return
-        car = Turtle("rectangle")
+        car = Turtle("square")
+        car.shapesize(stretch_wid=1, stretch_len=2)
         car.penup()
-        car.setpos(300, float(random.randint(-220, 250)))
-        car.left(180)
+        car.setheading(180)
         car.color(random.choice(COLORS))
+        car.setpos(300, float(random.randint(-220, 220)))
         self.cars.append(car)
 
     def move_cars(self, player):
         for car in self.cars:
             car.forward(self.speed)
-            # x_distance = player.turtle.xcor() - car.xcor()
-            # y_distance = player.turtle.ycor() - car.ycor()
-            # print(f"x_dist: {x_distance}     y_dist: {y_distance}")
 
-            if player.turtle.distance(car) < 20:
+            if player.distance(car) < 20:
                 return False
             if car.xcor() <= -350:
                 car.hideturtle()
@@ -38,5 +36,3 @@ class CarManager:
 
     def speedup(self):
         self.speed += MOVE_INCREMENT
-
-
